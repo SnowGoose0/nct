@@ -6,9 +6,8 @@ import { VillainReport } from '../villain';
   templateUrl: './villain.component.html',
   styleUrl: './villain.component.css'
 })
-
 export class VillainComponent {
-  // @Input() villain: VillainReport;
+  @Input() villain!: VillainReport;
 
   constructor() {};
 }

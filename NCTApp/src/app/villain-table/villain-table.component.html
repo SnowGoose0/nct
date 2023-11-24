@@ -1,5 +1,3 @@
-<p>villain-table works!</p>
-
 <table>
     <tr>
         <th>Location</th>
@@ -8,6 +6,8 @@
         <th>Status</th>
     </tr>
     <app-villain 
-        
+        *ngFor="let v of villainReports"
+        [villain] = "v"
     ></app-villain>
+    <p></p>
 </table>

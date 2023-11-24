@@ -3,9 +3,9 @@ import { VillainReport, VillainStatus } from '../villain';
 import { ReportService } from '../report.service';
 
 @Component({
-    selector: 'app-villain-table',
-    templateUrl: './villain-table.component.html',
-    styleUrl: './villain-table.component.css',
+  selector: 'app-villain-table',
+  templateUrl: './villain-table.component.html',
+  styleUrl: './villain-table.component.css'
 })
 export class VillainTableComponent implements OnInit {
   villainReports:VillainReport[];
@@ -23,3 +23,4 @@ export class VillainTableComponent implements OnInit {
     this.villainReports = this.rs.getAllReports();
   }
 }
+
