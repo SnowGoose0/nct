@@ -9,6 +9,7 @@ import { StatusPipe } from './status.pipe';
 import { MapComponent } from './map/map.component';
 import { VillainFormComponent } from './villain-form/villain-form.component';
 import { RoutingModule } from './routing.module';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -21,8 +22,9 @@ import { RoutingModule } from './routing.module';
   ],
   imports: [
     BrowserModule,
+    ReactiveFormsModule,
     AppRoutingModule,
-    RoutingModule
+    RoutingModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

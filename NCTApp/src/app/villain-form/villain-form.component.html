@@ -1,1 +1,33 @@
-<p>villain-form works!</p>
+<form
+  id="villain-form"
+  [formGroup]="form"
+  (ngSubmit)="onSubmit()"
+>
+  <fieldset>
+    <legend>New Report</legend>
+    <input 
+      type="text" 
+      name="name"
+      formControlName="reporter"
+      placeholder="REPORTER NAME"
+    > <br>
+
+    <input 
+      type="text" 
+      name="mischief_maker"
+      formControlName="mischief_maker"
+      placeholder="MISCHIEF MAKER"
+    > <br>
+
+    <input 
+      type="url" 
+      name="picture"
+      formControlName="picture"
+      placeholder="IMAGE"
+    > <br>
+
+   <textarea name="comments" id="villain-form" formControlName="comments" cols="30" rows="10"></textarea> <br>
+
+    <button [disabled]="!form.valid">Save</button>
+  </fieldset>
+</form>
