@@ -11,6 +11,9 @@ export class ReportService {
   
   constructor() { 
     this.reports = [];
+    let fdf:VillainReport = new VillainReport('vancouver', 'johnny', new Date(), VillainStatus.Open, 'idk', 'cooking')
+    let sss:VillainReport = new VillainReport('burnaby', 'johnny', new Date(), VillainStatus.Open, 'idk', 'cooking')
+    this.reports = [fdf, sss];
   }
 
   addReport(report: VillainReport) {

@@ -1,3 +1,5 @@
+<app-map></app-map>
+
 <table>
     <tr>
         <th>Location</th>
@@ -5,9 +7,10 @@
         <th>Time</th>
         <th>Status</th>
     </tr>
-    <app-villain 
+    <tr app-villain 
         *ngFor="let v of villainReports"
         [villain] = "v"
-    ></app-villain>
-    <p></p>
+    ></tr>
 </table>
+
+<a routerLink="/add">Create Nuisance Report</a>

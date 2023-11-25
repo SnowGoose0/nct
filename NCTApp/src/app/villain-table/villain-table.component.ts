@@ -11,12 +11,7 @@ export class VillainTableComponent implements OnInit {
   villainReports:VillainReport[];
   
   constructor(private rs: ReportService) {
-    this.villainReports = [];
-
-    let fdf:VillainReport = new VillainReport('vancouver', 'johnny', new Date(), VillainStatus.Open, 'idk', 'cooking')
-    let sss:VillainReport = new VillainReport('vancouver', 'johnny', new Date(), VillainStatus.Open, 'idk', 'cooking')
-    this.villainReports = [fdf, sss];
-    
+    this.villainReports = [];    
   }
 
   ngOnInit(): void {
