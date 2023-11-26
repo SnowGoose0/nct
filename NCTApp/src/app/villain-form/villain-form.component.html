@@ -1,7 +1,7 @@
 <form
   id="villain-form"
   [formGroup]="form"
-  (ngSubmit)="onSubmit()"
+  (ngSubmit)="onSubmit(form.value)"
 >
   <fieldset>
     <legend>New Report</legend>
@@ -18,6 +18,37 @@
       formControlName="mischief_maker"
       placeholder="MISCHIEF MAKER"
     > <br>
+
+    <div>
+      <input 
+        type="text" 
+        name="location"
+        list="preset-locations"
+        formControlName="location"
+        placeholder="PLACE NAME"
+      >
+
+      <datalist id="preset-locations">
+        <option
+          *ngFor="let l of locations"
+          [value]="l.getLocation()"
+        ></option>
+      </datalist>
+
+      <input 
+        type="text" 
+        name="coordinate-X"
+        formControlName="coordX"
+        placeholder="X COORDINATE"
+      >
+
+      <input 
+        type="text" 
+        name="coordinate-Y"
+        formControlName="coordY"
+        placeholder="Y COORDINATE"
+      >
+    </div>
 
     <input 
       type="url" 

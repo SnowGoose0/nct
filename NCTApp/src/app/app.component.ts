@@ -6,7 +6,7 @@ import { AfterViewInit, Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'NCTApp';
+  title:string = 'NCT App';
 
   newReport() {
     console.log("Redirecting!");

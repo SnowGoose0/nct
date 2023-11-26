@@ -10,6 +10,8 @@ import { MapComponent } from './map/map.component';
 import { VillainFormComponent } from './villain-form/villain-form.component';
 import { RoutingModule } from './routing.module';
 import { ReactiveFormsModule } from '@angular/forms';
+import { VillainEditFormComponent } from './villain-edit-form/villain-edit-form.component';
+import { VillainInfoComponent } from './villain-info/villain-info.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +20,9 @@ import { ReactiveFormsModule } from '@angular/forms';
     VillainTableComponent,
     StatusPipe,
     MapComponent,
-    VillainFormComponent
+    VillainFormComponent,
+    VillainEditFormComponent,
+    VillainInfoComponent
   ],
   imports: [
     BrowserModule,

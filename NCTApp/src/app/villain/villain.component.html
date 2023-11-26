@@ -1,4 +1,5 @@
 <td>{{ villain.location | titlecase }}</td>
 <td>{{ villain.name | titlecase }}</td>
-<td>{{ villain.time | date:"MMM dd, yyyy 'at' hh:mm a" }}</td>
+<td>{{ villain.time | date:"yyyy-MMM-dd '('hh:mm a')'" }}</td>
 <td>{{ villain.getStatus() | status}}</td>
+<td><button (click)="onMoreInfo()">More Info</button></td>
