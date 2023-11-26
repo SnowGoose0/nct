@@ -20,7 +20,9 @@
     > <br>
 
     <div>
-      <input 
+      <input
+        [(ngModel)]="inputLocation"
+        (ngModelChange)="onInputLocation()"
         type="text" 
         name="location"
         list="preset-locations"
@@ -40,6 +42,7 @@
         name="coordinate-X"
         formControlName="coordX"
         placeholder="X COORDINATE"
+        [value]="coordX"
       >
 
       <input 
@@ -47,6 +50,7 @@
         name="coordinate-Y"
         formControlName="coordY"
         placeholder="Y COORDINATE"
+        [value]="coordY"
       >
     </div>
 

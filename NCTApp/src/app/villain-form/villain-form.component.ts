@@ -13,6 +13,10 @@ import { VillainLocation } from '../location';
 export class VillainFormComponent implements OnInit{
   form: FormGroup;
   locations: VillainLocation[]
+  inputLocation:string | undefined;
+  coordX: number | undefined;
+  coordY: number | undefined;
+
   constructor(private reportService:ReportService, private router:Router) {
     const formControls = {
       reporter: new FormControl('', [Validators.required, Validators.minLength(2)]),
@@ -38,5 +42,21 @@ export class VillainFormComponent implements OnInit{
     const report:VillainReport = new VillainReport(input.location, input.mischief_maker, new Date(), VillainStatus.Open, input.mischief_maker, input.comments)
     this.reportService.addReport(report);
     this.router.navigate(["/"])
+  }
+
+  onInputLocation() {
+    const filteredLocations:VillainLocation[] = this.locations.filter((l) => {
+      return l.getLocation() == this.inputLocation;
+    });
+
+    if (filteredLocations.length === 0) {
+      this.coordX = undefined;
+      this.coordY = undefined;
+      return;
+    }
+
+    const definedCoords:{x:number, y:number} = filteredLocations[0].getCoordinates();
+    this.coordX = definedCoords.x;
+    this.coordY = definedCoords.y;
   }
 }
