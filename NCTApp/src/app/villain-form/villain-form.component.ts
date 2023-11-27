@@ -39,7 +39,7 @@ export class VillainFormComponent implements OnInit{
 
   onSubmit(input:any) {
     console.log(input);
-    const report:VillainReport = new VillainReport(input.location, input.mischief_maker, new Date(), VillainStatus.Open, input.mischief_maker, input.comments)
+    const report:VillainReport = new VillainReport(input.location, {x: input.coordX, y: input.coordY}, input.mischief_maker, new Date(), VillainStatus.Open, input.mischief_maker, input.picture, input.comments)
     this.reportService.addReport(report);
     this.router.navigate(["/"])
   }

@@ -14,8 +14,8 @@ export class ReportService {
   constructor() { 
     this.reports = [];
     this.locations = [];
-    let fdf:VillainReport = new VillainReport('vancouver', 'johnny', new Date(), VillainStatus.Open, 'idk', 'cooking')
-    let sss:VillainReport = new VillainReport('burnaby', 'johnny', new Date(), VillainStatus.Open, 'idk', 'cooking')
+    let fdf:VillainReport = new VillainReport('vancouver', {x: 1.1, y:2.2}, 'johnny', new Date(), VillainStatus.Open, 'idk', null, 'cooking')
+    let sss:VillainReport = new VillainReport('burnaby', {x: 1.1, y:2.2}, 'johnny', new Date(), VillainStatus.Open, 'idk', null, 'cooking')
     let lll:VillainLocation = new VillainLocation('burnaby', 404.404, 505.505);
     this.reports = [fdf, sss];
     this.locations = [lll];

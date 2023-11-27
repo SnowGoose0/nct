@@ -13,12 +13,12 @@ export class VillainReport implements Villain {
 
 	constructor (
 		public location: string, 
-    // public coordinates: {x:number, y:number},
+    public coordinates: {x:number, y:number},
 		public name: string, 
 		public time: Date, 
 		private status: VillainStatus,
 		public reporter: string,
-    // public image: string,
+    public image: string | null,
 		public description: string,
 		) {
 		
