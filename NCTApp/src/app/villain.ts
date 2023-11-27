@@ -13,10 +13,12 @@ export class VillainReport implements Villain {
 
 	constructor (
 		public location: string, 
+    // public coordinates: {x:number, y:number},
 		public name: string, 
 		public time: Date, 
 		private status: VillainStatus,
 		public reporter: string,
+    // public image: string,
 		public description: string,
 		) {
 		
@@ -34,4 +36,8 @@ export class VillainReport implements Villain {
 	updateStatus(s: VillainStatus) {
 		this.status = s;
 	}
+
+  getImageAlt() {
+    return `devious image of the villainous "${this.name}"`;
+  }
 }

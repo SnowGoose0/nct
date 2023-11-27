@@ -46,7 +46,7 @@ export class VillainFormComponent implements OnInit{
 
   onInputLocation() {
     const filteredLocations:VillainLocation[] = this.locations.filter((l) => {
-      return l.getLocation() == this.inputLocation;
+      return l.getLocation() === this.inputLocation;
     });
 
     if (filteredLocations.length === 0) {

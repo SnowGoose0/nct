@@ -1,5 +1,5 @@
 export class VillainLocation {
-  constructor(private location:string, private x:number, private y:number) {}
+  constructor(private location:string, private x:number, private y:number, private count:number = 1) {}
 
   getCoordinates() {
     return {
@@ -18,5 +18,17 @@ export class VillainLocation {
 
   updateCoordinates(x:number, y:number) {
     this.x = x; this.y = y
+  }
+
+  getCount() {
+    return this.count;
+  }
+
+  incrementCount() {
+    this.count++;
+  }
+
+  decrementCount() {
+    this.count--;
   }
 }
