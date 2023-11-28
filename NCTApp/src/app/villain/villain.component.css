@@ -1,0 +1,45 @@
+/* Add this CSS to your global styles or component-specific styles */
+
+body {
+    background-color: #1e1e1e;
+    color: #c9d1d9;
+  }
+  
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+th, td {
+    padding: 12px;
+    text-align: left;
+    border-bottom: 1px solid #2d333b;
+}
+
+th {
+    background-color: #2d333b;
+    cursor: pointer;
+}
+
+tr:nth-child(even) {
+    background-color: #2d333b;
+}
+
+tr:hover {
+    background-color: #3e4451;
+}
+
+button {
+    background-color: #2d333b;
+    color: #c9d1d9;
+    border: none;
+    padding: 12px 20px;
+    margin-top: 20px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #3e4451;
+}
+  

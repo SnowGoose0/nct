@@ -8,6 +8,13 @@ export interface Villain {
 	name: string;
 }
 
+export enum SortMethod {
+	Reporter,
+  Villain,
+  Time,
+  Location,
+}
+
 export class VillainReport implements Villain {
 	private id: string;
 

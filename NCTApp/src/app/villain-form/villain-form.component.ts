@@ -10,7 +10,7 @@ import { VillainLocation } from '../location';
   templateUrl: './villain-form.component.html',
   styleUrl: './villain-form.component.css'
 })
-export class VillainFormComponent implements OnInit{
+export class VillainFormComponent implements OnInit {
   form: FormGroup;
   locations: VillainLocation[]
   inputLocation:string | undefined;
@@ -21,7 +21,7 @@ export class VillainFormComponent implements OnInit{
     const formControls = {
       reporter: new FormControl('', [Validators.required, Validators.minLength(2)]),
       mischief_maker: new FormControl('', [Validators.required, Validators.minLength(2)]),
-      picture: new FormControl('', [Validators.pattern("https://.*")]),
+      picture: new FormControl('', [Validators.pattern("https://*")]),
       location: new FormControl('', [Validators.required]),
       coordX: new FormControl('', [Validators.required]),
       coordY: new FormControl('', [Validators.required]),
@@ -58,5 +58,7 @@ export class VillainFormComponent implements OnInit{
     const definedCoords:{x:number, y:number} = filteredLocations[0].getCoordinates();
     this.coordX = definedCoords.x;
     this.coordY = definedCoords.y;
+    this.form.get('coordX')?.setValue(definedCoords.x);
+    this.form.get('coordY')?.setValue(definedCoords.y);
   }
 }

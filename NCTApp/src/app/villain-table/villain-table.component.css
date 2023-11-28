@@ -1,0 +1,41 @@
+/* Add this CSS to your global styles or component-specific styles */
+table {
+    border-collapse: collapse;
+    margin-top: 20px;
+    font-size: 10pt;
+}
+
+th, td {
+    padding: 5px;
+    text-align: center;
+    border-bottom: 1px solid #a4abb5;
+}
+
+th {
+    background-color: #1e1e1e;
+    cursor: pointer;
+}
+
+tr {
+    background-color: #1e1e1e;
+    border-bottom: 1px solid #a4abb5;
+}
+
+tr:hover {
+    background-color: #3e4451;
+}
+
+button {
+    background-color: #2d333b;
+    color: #c9d1d9;
+    border-radius: 5px;
+    border: none;
+    padding: 10px 15px;
+    margin-top: 20px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #4f5967;
+}
+  

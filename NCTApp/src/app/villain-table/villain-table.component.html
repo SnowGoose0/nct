@@ -2,14 +2,14 @@
 
 <table>
     <tr>
-        <th>Location</th>
-        <th>Name</th>
-        <th>Time</th>
+        <th (click)="setSortMethod(0)">Location</th>
+        <th (click)="setSortMethod(1)">Name</th>
+        <th (click)="setSortMethod(2)">Time</th>
         <th>Status</th>
         <th>Info</th>
     </tr>
     <tr app-villain 
-        *ngFor="let v of villainReports"
+        *ngFor="let v of (villainReports | sort: sortMethod)"
         [villain] = "v"
     ></tr>
 </table>

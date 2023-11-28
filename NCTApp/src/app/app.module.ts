@@ -12,6 +12,7 @@ import { RoutingModule } from './routing.module';
 import { ReactiveFormsModule } from '@angular/forms';
 import { VillainEditFormComponent } from './villain-edit-form/villain-edit-form.component';
 import { VillainInfoComponent } from './villain-info/villain-info.component';
+import { SortPipe } from './sort.pipe';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { VillainInfoComponent } from './villain-info/villain-info.component';
     MapComponent,
     VillainFormComponent,
     VillainEditFormComponent,
-    VillainInfoComponent
+    VillainInfoComponent,
+    SortPipe
   ],
   imports: [
     BrowserModule,
