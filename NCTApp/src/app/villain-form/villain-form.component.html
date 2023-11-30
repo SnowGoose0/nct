@@ -13,6 +13,13 @@
     > <br>
 
     <input 
+      type="tel" 
+      name="name"
+      formControlName="telephone"
+      placeholder="PHONE NUMBER"
+    > <br>
+
+    <input 
       type="text" 
       name="mischief_maker"
       formControlName="mischief_maker"
@@ -27,7 +34,7 @@
         name="location"
         list="preset-locations"
         formControlName="location"
-        placeholder="PLACE NAME"
+        placeholder="LOCATION"
       >
 
       <datalist id="preset-locations">
@@ -58,13 +65,20 @@
       type="url" 
       name="picture"
       formControlName="picture"
-      placeholder="IMAGE URL"
+      placeholder="IMAGE URL (OPTIONAL)"
     > <br>
 
-   <textarea name="comments" id="villain-form" formControlName="comments" cols="30" rows="10"></textarea> <br>
+   <textarea name="comments" id="villain-form" formControlName="comments" cols="30" rows="10" placeholder="DESCRIPTION"></textarea> <br>
    <button routerLink="/">Cancel</button>
     <button [disabled]="!form.valid">Publish</button>
   </fieldset>
 </form>
+<h3>Click the map to choose coordinates</h3>
+<p><strong>x:</strong> {{ selectedCoordX }}&nbsp;&nbsp;<strong>y:</strong>{{ selectedCoordY }}</p>
+<button 
+  id="use" 
+  *ngIf="selectedCoordX !== undefined && selectedCoordY != undefined"
+  (click)="onUseCoordinates()"
+  >Apply</button>
 
-<app-map></app-map>
+<app-map (mapClick)="onSelectCoordinates($event)"></app-map>

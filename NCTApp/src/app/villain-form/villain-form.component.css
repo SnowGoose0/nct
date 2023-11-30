@@ -34,7 +34,7 @@ textarea {
 }
 
 textarea {
-    height: 50px;
+    height: 125px;
 }
 
 div {
@@ -42,8 +42,17 @@ div {
     gap: 10px;
 }
 
+h3 {
+    margin-top: 50px;
+}
+
+#use {
+    margin-top: 0;
+    margin-bottom: 25px;
+}
+
 button {
-    background-color: #61dafb;
+    background-color: #55c0de;
     color: #1e1e1e;
     border: none;
     padding: 10px 15px;
@@ -52,12 +61,24 @@ button {
     margin-right: 10px;
 }
 
+button:hover {
+    background-color: #62d5f5;
+}
+
 button[routerLink="/"] {
     background-color: #2d333b;
     color: #c9d1d9;
 }
 
+button[routerLink="/"]:hover {
+    background-color: #4f5967;
+}
+
 button[disabled] {
     opacity: 0.1;
     cursor: not-allowed;
+}
+
+p {
+    font-size: small;
 }

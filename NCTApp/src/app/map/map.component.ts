@@ -1,7 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, Output, OnInit } from '@angular/core';
 import "leaflet/dist/leaflet.css";
 import * as L from 'leaflet';
-import {icon, Marker} from 'leaflet';
 import { ReportService } from '../report.service';
 import { VillainLocation } from '../location';
 
@@ -13,6 +12,7 @@ import { VillainLocation } from '../location';
 export class MapComponent implements OnInit{
   private map!: L.Map
   private activeCircleMarker:L.CircleMarker<any> | null;
+  @Output() mapClick = new EventEmitter();
 
   constructor(private reportService: ReportService) {
     this.activeCircleMarker = null;
@@ -30,15 +30,19 @@ export class MapComponent implements OnInit{
   }
 
   onMapClick(event:any) {
-    console.log(event.latlng);
-
     if (this.activeCircleMarker !== null) {
       this.map.removeLayer(this.activeCircleMarker);
     }
 
     this.activeCircleMarker = L.circleMarker(event.latlng);
     this.activeCircleMarker.addTo(this.map);
-    this.activeCircleMarker.setStyle({fillColor: 'red'})
+    this.activeCircleMarker.setStyle({
+      color: 'red',
+      fillColor: 'red', 
+      radius: 5
+    });
+
+    this.mapClick.emit(event.latlng);
   }
 
   putLabels() {

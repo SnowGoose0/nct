@@ -14,12 +14,17 @@ export class VillainFormComponent implements OnInit {
   form: FormGroup;
   locations: VillainLocation[]
   inputLocation:string | undefined;
+
   coordX: number | undefined;
   coordY: number | undefined;
+
+  selectedCoordX: number | undefined;
+  selectedCoordY: number | undefined;
 
   constructor(private reportService:ReportService, private router:Router) {
     const formControls = {
       reporter: new FormControl('', [Validators.required, Validators.minLength(2)]),
+      telephone: new FormControl('', [Validators.required]),
       mischief_maker: new FormControl('', [Validators.required, Validators.minLength(2)]),
       picture: new FormControl('', [Validators.pattern("https://*")]),
       location: new FormControl('', [Validators.required]),
@@ -39,7 +44,17 @@ export class VillainFormComponent implements OnInit {
 
   onSubmit(input:any) {
     console.log(input);
-    const report:VillainReport = new VillainReport(input.location, {x: input.coordX, y: input.coordY}, input.mischief_maker, new Date(), VillainStatus.Open, input.mischief_maker, input.picture, input.comments)
+    const report:VillainReport = new VillainReport(
+      input.mischief_maker,
+      input.reporter,
+      new Date(), 
+      input.location, 
+      {x: input.coordX, y: input.coordY}, 
+      VillainStatus.Open, 
+      input.comments,
+      input.picture, 
+    )
+    
     const location:VillainLocation = new VillainLocation(input.location, input.coordX, input.coordY);
     this.reportService.addReport(report);
     this.reportService.addLocation(location);
@@ -52,15 +67,28 @@ export class VillainFormComponent implements OnInit {
     });
 
     if (filteredLocations.length === 0) {
-      this.coordX = undefined;
-      this.coordY = undefined;
       return;
     }
 
     const definedCoords:{x:number, y:number} = filteredLocations[0].getCoordinates();
-    this.coordX = definedCoords.x;
-    this.coordY = definedCoords.y;
-    this.form.get('coordX')?.setValue(definedCoords.x);
-    this.form.get('coordY')?.setValue(definedCoords.y);
+    this.setFormCoordinates(definedCoords.x, definedCoords.y);
+  }
+
+  onSelectCoordinates(event:any) {
+    this.selectedCoordX = event.lat;
+    this.selectedCoordY = event.lng;
+  }
+
+  onUseCoordinates() {
+    if (!this.selectedCoordX || !this.selectedCoordY) return;
+
+    this.setFormCoordinates(this.selectedCoordX, this.selectedCoordY);
+  }
+
+  setFormCoordinates(x:number, y:number) {
+    this.coordX = x;
+    this.coordY = y;
+    this.form.get('coordX')?.setValue(x);
+    this.form.get('coordY')?.setValue(y);
   }
 }

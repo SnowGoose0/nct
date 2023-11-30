@@ -16,20 +16,19 @@ export enum SortMethod {
 }
 
 export class VillainReport implements Villain {
-	private id: string;
 
 	constructor (
+    public name: string,
+    public reporter: string, 
+    public time: Date, 
 		public location: string, 
     public coordinates: {x:number, y:number},
-		public name: string, 
-		public time: Date, 
 		private status: VillainStatus,
-		public reporter: string,
-    public image: string | null,
 		public description: string,
+    public imageurl:string | null = null,
+    private id:string = "id" + Math.random().toString(32).slice(2),
 		) {
 		
-		this.id = "id" + Math.random().toString(32).slice(2);
 	}
     
   getId () {

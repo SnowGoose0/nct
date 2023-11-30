@@ -10,7 +10,8 @@ import { MapComponent } from './map/map.component';
 import { VillainFormComponent } from './villain-form/villain-form.component';
 import { RoutingModule } from './routing.module';
 import { ReactiveFormsModule } from '@angular/forms';
-import { VillainEditFormComponent } from './villain-edit-form/villain-edit-form.component';
+import { VillainAuthenticationComponent } from './villain-authentication/villain-authentication.component';
+import { HttpClientModule } from '@angular/common/http';
 import { VillainInfoComponent } from './villain-info/villain-info.component';
 import { SortPipe } from './sort.pipe';
 
@@ -22,7 +23,7 @@ import { SortPipe } from './sort.pipe';
     StatusPipe,
     MapComponent,
     VillainFormComponent,
-    VillainEditFormComponent,
+    VillainAuthenticationComponent,
     VillainInfoComponent,
     SortPipe
   ],
@@ -30,6 +31,7 @@ import { SortPipe } from './sort.pipe';
     BrowserModule,
     ReactiveFormsModule,
     AppRoutingModule,
+    HttpClientModule,
     RoutingModule,
   ],
   providers: [],
