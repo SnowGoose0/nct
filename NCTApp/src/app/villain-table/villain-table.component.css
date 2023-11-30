@@ -1,8 +1,10 @@
 /* Add this CSS to your global styles or component-specific styles */
 table {
     border-collapse: collapse;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     margin-top: 20px;
     font-size: 10pt;
+    width: 100%;
 }
 
 th, td {
@@ -12,6 +14,7 @@ th, td {
 }
 
 th {
+    border-top: 1px solid #a4abb5;
     background-color: #1e1e1e;
     cursor: pointer;
 }
@@ -19,23 +22,14 @@ th {
 tr {
     background-color: #1e1e1e;
     border-bottom: 1px solid #a4abb5;
+    text-align: center;
 }
 
-tr:hover {
+.sortable:hover {
     background-color: #3e4451;
 }
 
-button {
-    background-color: #2d333b;
-    color: #c9d1d9;
-    border-radius: 5px;
-    border: none;
-    padding: 10px 15px;
-    margin-top: 20px;
-    cursor: pointer;
-}
-
-button:hover {
-    background-color: #4f5967;
+tr:hover {
+    background-color: #232323;
 }
   

@@ -2,11 +2,27 @@
 
 <table>
     <tr>
-        <th (click)="setSortMethod(0)">Location</th>
-        <th (click)="setSortMethod(1)">Name</th>
-        <th (click)="setSortMethod(2)">Time</th>
+        <th class="sortable" 
+            (click)="setSortMethod(0)" 
+            (mouseenter)="onSortSymbolDisplay(0)"
+            (mouseleave)="onSortSymbolDisplay(-1)"
+        >Location <span *ngIf="sortSymbolDisplay === 0">↑</span></th>
+
+        <th class="sortable" 
+            (click)="setSortMethod(1)"
+            (mouseenter)="onSortSymbolDisplay(1)"
+            (mouseleave)="onSortSymbolDisplay(-1)"
+        >Name <span *ngIf="sortSymbolDisplay === 1">↑</span></th>
+
+        <th class="sortable" 
+            (click)="setSortMethod(2)"
+            (mouseenter)="onSortSymbolDisplay(2)"
+            (mouseleave)="onSortSymbolDisplay(-1)"
+        >Time <span *ngIf="sortSymbolDisplay === 2">↑</span></th>
+
         <th>Status</th>
-        <th>Info</th>
+        <th></th>
+        <th></th>
     </tr>
     <tr app-villain 
         *ngFor="let v of (villainReports | sort: sortMethod)"

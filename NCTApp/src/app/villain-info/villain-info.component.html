@@ -1,8 +1,7 @@
-<p>villain-info works!</p>
 <div *ngIf="report === undefined; then display_error else display_report"></div>
 
 <ng-template #display_error>
-  Error: Report not found!
+Error: Report not found!
 </ng-template>
 <ng-template #display_report>
   <div>

@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { VillainStatus } from './villain';
 import { VillainReport } from './villain';
 import { VillainLocation } from './location';
+import { BehaviorSubject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -14,15 +15,34 @@ export class ReportService {
   constructor() { 
     this.reports = [];
     this.locations = [];
-    let fdf:VillainReport = new VillainReport('vancouver', {x: 1.1, y:2.2}, 'johnny', new Date(), VillainStatus.Open, 'idk', null, 'cooking')
-    let sss:VillainReport = new VillainReport('burnaby', {x: 1.1, y:2.2}, 'johnny', new Date(), VillainStatus.Open, 'idk', null, 'cooking')
-    let lll:VillainLocation = new VillainLocation('burnaby', 404.404, 505.505);
+    let burnaby = {x: 49.2781, y: -122.9199};
+    let metro = {x: 49.2276, y:-123.0076};
+    let fdf:VillainReport = new VillainReport('metrotown', metro, 'johnny', new Date(), VillainStatus.Open, 'idk', null, 'cooking')
+    let sss:VillainReport = new VillainReport('burnaby', burnaby, 'johnny', new Date(), VillainStatus.Open, 'idk', null, 'cooking')
+    let lll:VillainLocation = new VillainLocation('burnaby', burnaby.x, burnaby.y);
+    let kkk:VillainLocation = new VillainLocation('metrotown', metro.x, metro.y);
     this.reports = [fdf, sss];
-    this.locations = [lll];
+    this.locations = [lll, kkk];
   }
 
   addReport(report: VillainReport) {
     this.reports.push(report);
+  }
+
+  deleteReport(report: VillainReport) {
+    this.reports = this.reports.filter((r: VillainReport) => {
+      return r.getId() != report.getId();
+    });
+
+    const locationIndex:number = this.locations.findIndex((l) => {
+      return l.getLocation().toLowerCase() === report.location.toLowerCase();
+    });
+
+    if (this.locations[locationIndex].getCount() === 1) {
+      this.locations.splice(locationIndex, 1);
+    } else {
+      this.locations[locationIndex].decrementCount();
+    }
   }
 
   updateReport(report: VillainReport, status: VillainStatus) {
@@ -42,10 +62,20 @@ export class ReportService {
     return this.reports;
   }
 
-  deleteReport(report: VillainReport) {
-    this.reports = this.reports.filter((r: VillainReport) => {
-      r.getId() != report.getId();
+  addLocation(location:VillainLocation) {
+    const locationName:string = location.getLocation();
+    const locationCoordinates:{x:number, y:number} = location.getCoordinates();
+    const searchLocation:VillainLocation | undefined = this.locations.find((l) => {
+      return l.getLocation().toLowerCase() === locationName.toLowerCase();
     });
+
+    if (!searchLocation) {
+      const newLocation = new VillainLocation(locationName, locationCoordinates.x, locationCoordinates.y);
+      this.locations.push(newLocation);
+      return;
+    }
+
+    searchLocation.incrementCount();
   }
 
   getLocations() {

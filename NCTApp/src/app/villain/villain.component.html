@@ -1,5 +1,6 @@
 <td>{{ villain.location | titlecase }}</td>
 <td>{{ villain.name | titlecase }}</td>
-<td>{{ villain.time | date:"yyyy-MMM-dd '('hh:mm a')'" }}</td>
+<td>{{ villain.time | date:"yyyy-MMM-dd hh:mma" }}</td>
 <td>{{ villain.getStatus() | status}}</td>
-<td><button (click)="onMoreInfo()">More Info</button></td>
+<td><button class="more-info table-btn" (click)="onMoreInfo()">More Info</button></td>
+<td><button (click)="toggleDeleteReport($event)" class="del table-btn">Delete</button></td>

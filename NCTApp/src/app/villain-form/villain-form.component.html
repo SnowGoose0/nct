@@ -38,18 +38,18 @@
       </datalist>
 
       <input 
-        type="text" 
+        type="number" 
         name="coordinate-X"
         formControlName="coordX"
-        placeholder="X COORDINATE"
+        placeholder="X"
         [value]="coordX"
       >
 
       <input 
-        type="text" 
+        type="number" 
         name="coordinate-Y"
         formControlName="coordY"
-        placeholder="Y COORDINATE"
+        placeholder="Y"
         [value]="coordY"
       >
     </div>
@@ -58,7 +58,7 @@
       type="url" 
       name="picture"
       formControlName="picture"
-      placeholder="IMAGE"
+      placeholder="IMAGE URL"
     > <br>
 
    <textarea name="comments" id="villain-form" formControlName="comments" cols="30" rows="10"></textarea> <br>
@@ -66,3 +66,5 @@
     <button [disabled]="!form.valid">Publish</button>
   </fieldset>
 </form>
+
+<app-map></app-map>

@@ -11,10 +11,12 @@ table {
     margin-top: 20px;
 }
 
-th, td {
+td {
     padding: 12px;
-    text-align: left;
+    text-align: center;
     border-bottom: 1px solid #2d333b;
+    padding-left: 20px;
+    padding-right: 20px;
 }
 
 th {
@@ -22,21 +24,8 @@ th {
     cursor: pointer;
 }
 
-tr:nth-child(even) {
-    background-color: #2d333b;
-}
-
-tr:hover {
-    background-color: #3e4451;
-}
-
-button {
-    background-color: #2d333b;
-    color: #c9d1d9;
-    border: none;
-    padding: 12px 20px;
-    margin-top: 20px;
-    cursor: pointer;
+.table-btn {
+    margin-top: 0;
 }
 
 button:hover {

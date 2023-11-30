@@ -5,15 +5,18 @@ import { ReportService } from '../report.service';
 @Component({
   selector: 'app-villain-table',
   templateUrl: './villain-table.component.html',
-  styleUrl: './villain-table.component.css'
+  styleUrl: './villain-table.component.css',
+  host: {'class': 'villain-table'}
 })
 export class VillainTableComponent implements OnInit {
   villainReports:VillainReport[];
   sortMethod: SortMethod;
+  sortSymbolDisplay: number;
   
   constructor(private rs: ReportService) {
     this.sortMethod = SortMethod.Villain;
-    this.villainReports = [];    
+    this.villainReports = [];   
+    this.sortSymbolDisplay = -1; 
   }
 
   setSortMethod(method: number) {
@@ -30,8 +33,16 @@ export class VillainTableComponent implements OnInit {
     }
   }
 
-  ngOnInit(): void {
+  onSortSymbolDisplay(index: number) {
+    this.sortSymbolDisplay = index;
+  }
+
+  onUpdateTable() {
     this.villainReports = this.rs.getAllReports();
+  }
+
+  ngOnInit(): void {
+    this.onUpdateTable();
   }
 }
 

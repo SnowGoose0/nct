@@ -23,7 +23,7 @@ export class VillainFormComponent implements OnInit {
       mischief_maker: new FormControl('', [Validators.required, Validators.minLength(2)]),
       picture: new FormControl('', [Validators.pattern("https://*")]),
       location: new FormControl('', [Validators.required]),
-      coordX: new FormControl('', [Validators.required]),
+      coordX: new FormControl('', [Validators.required,]),
       coordY: new FormControl('', [Validators.required]),
       comments: new FormControl('', [Validators.required, Validators.minLength(1)]),
     }
@@ -40,7 +40,9 @@ export class VillainFormComponent implements OnInit {
   onSubmit(input:any) {
     console.log(input);
     const report:VillainReport = new VillainReport(input.location, {x: input.coordX, y: input.coordY}, input.mischief_maker, new Date(), VillainStatus.Open, input.mischief_maker, input.picture, input.comments)
+    const location:VillainLocation = new VillainLocation(input.location, input.coordX, input.coordY);
     this.reportService.addReport(report);
+    this.reportService.addLocation(location);
     this.router.navigate(["/"])
   }
 

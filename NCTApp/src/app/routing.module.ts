@@ -10,7 +10,7 @@ const appRoutes: Routes = [
   { path: '', component: VillainTableComponent },
   { path: 'add', component: VillainFormComponent },
   { path: 'info/:id', component: VillainInfoComponent},
-  { path: 'edit/:id', component:  VillainEditFormComponent}
+  { path: 'auth/:action/:id', component:  VillainEditFormComponent}
 ]
 
 @NgModule({
