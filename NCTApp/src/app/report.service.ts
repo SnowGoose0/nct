@@ -46,7 +46,7 @@ export class ReportService {
 
   addReport(report: VillainReport) {
     this.reports.push(report);
-    this.syncReports();
+    return this.syncReports();
   }
 
   deleteReport(report: VillainReport) {
@@ -54,22 +54,13 @@ export class ReportService {
       return r.getId() != report.getId();
     });
 
-    const locationIndex:number = this.locations.findIndex((l) => {
-      return l.getLocation().toLowerCase() === report.location.toLowerCase();
-    });
-
-    if (this.locations[locationIndex].getCount() === 1) {
-      this.locations.splice(locationIndex, 1);
-    } else {
-      this.locations[locationIndex].decrementCount();
-    }
-    this.syncReports();
+    return this.syncReports();
   }
 
   updateReport(report: VillainReport, status: VillainStatus) {
     const idx: number = this.reports.findIndex((r:VillainReport) => r.getId() == report.getId());
     this.reports[idx].updateStatus(status);
-    this.syncReports();
+    return this.syncReports();
   }
 
   getReport(id: string) {
@@ -104,7 +95,21 @@ export class ReportService {
 
     console.log(this.locations);
 
-    this.syncLocations();
+    return this.syncLocations();
+  }
+
+  deleteLocation(location: string) {
+    const locationIndex:number = this.locations.findIndex((l) => {
+      return l.getLocation().toLowerCase() === location.toLowerCase();
+    });
+
+    if (this.locations[locationIndex].getCount() === 1) {
+      this.locations.splice(locationIndex, 1);
+    } else {
+      this.locations[locationIndex].decrementCount();
+    }
+
+    return this.syncLocations();
   }
 
   getLocations(): Observable<VillainLocation[]> {
@@ -123,16 +128,16 @@ export class ReportService {
   }
 
   syncReports() {
-    this.http.put(
+    return this.http.put(
       Storage.getDocumentKeyURL('test/', 'reports/'), 
       {"key": "reports", "data": this.reports}
-    ).subscribe((d) => {});
+    )
   }
 
   syncLocations() {
-    this.http.put(
+    return this.http.put(
       Storage.getDocumentKeyURL('test/', 'locations/'), 
       {"key": "locations", "data": this.locations}
-    ).subscribe((d) => {});
+    )
   }
 }

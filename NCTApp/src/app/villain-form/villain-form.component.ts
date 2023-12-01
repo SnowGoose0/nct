@@ -26,7 +26,8 @@ export class VillainFormComponent implements OnInit {
       reporter: new FormControl('', [Validators.required, Validators.minLength(2)]),
       telephone: new FormControl('', [Validators.required]),
       mischief_maker: new FormControl('', [Validators.required, Validators.minLength(2)]),
-      picture: new FormControl('', [Validators.pattern("https://*")]),
+      picture: new FormControl('', []),
+      // picture: new FormControl('', [Validators.pattern("https://*")]),
       location: new FormControl('', [Validators.required]),
       coordX: new FormControl('', [Validators.required,]),
       coordY: new FormControl('', [Validators.required]),
@@ -57,9 +58,11 @@ export class VillainFormComponent implements OnInit {
     )
     const location:VillainLocation = new VillainLocation(input.location, input.coordX, input.coordY);
     
-    this.reportService.addReport(report);
-    this.reportService.addLocation(location);
-    this.router.navigate(["/"])
+    this.reportService.addReport(report).subscribe(() => {
+      this.reportService.addLocation(location).subscribe(() => {
+        this.router.navigate(["/"]);
+      })
+    });
   }
 
   onInputLocation() {
