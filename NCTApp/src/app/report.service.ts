@@ -20,12 +20,6 @@ export class ReportService {
     this.locations = [];
     let burnaby = {x: 49.2781, y: -122.9199};
     let metro = {x: 49.2276, y:-123.0076};
-    // let fdf:VillainReport = new VillainReport('metrotown', metro, 'johnny', new Date(), VillainStatus.Open, 'idk', null, 'cooking')
-    // let sss:VillainReport = new VillainReport('burnaby', burnaby, 'johnny', new Date(), VillainStatus.Open, 'idk', null, 'cooking')
-    // let lll:VillainLocation = new VillainLocation('burnaby', burnaby.x, burnaby.y);
-    // let kkk:VillainLocation = new VillainLocation('metrotown', metro.x, metro.y);
-    // this.reports = [fdf, sss];
-    // this.locations = [lll, kkk];
 
     this.http.get(Storage.getDocumentKeyURL('test/', 'reports/'))
       .subscribe((res: Object) => {
@@ -52,7 +46,7 @@ export class ReportService {
 
   addReport(report: VillainReport) {
     this.reports.push(report);
-    this.syncData();
+    this.syncReports();
   }
 
   deleteReport(report: VillainReport) {
@@ -69,13 +63,13 @@ export class ReportService {
     } else {
       this.locations[locationIndex].decrementCount();
     }
-    this.syncData();
+    this.syncReports();
   }
 
   updateReport(report: VillainReport, status: VillainStatus) {
     const idx: number = this.reports.findIndex((r:VillainReport) => r.getId() == report.getId());
     this.reports[idx].updateStatus(status);
-    this.syncData();
+    this.syncReports();
   }
 
   getReport(id: string) {
@@ -93,64 +87,52 @@ export class ReportService {
   addLocation(location:VillainLocation) {
     const locationName:string = location.getLocation();
     const locationCoordinates:{x:number, y:number} = location.getCoordinates();
-    const searchLocation:VillainLocation | undefined = this.locations.find((l) => {
+    const searchLocationIndex:number | undefined = this.locations.findIndex((l) => {
       return l.getLocation().toLowerCase() === locationName.toLowerCase();
     });
+
+    const searchLocation:VillainLocation = this.locations[searchLocationIndex];
 
     if (!searchLocation) {
       const newLocation = new VillainLocation(locationName, locationCoordinates.x, locationCoordinates.y);
       this.locations.push(newLocation);
-      return;
     }
 
-    searchLocation.incrementCount();
-    this.syncData();
+    else {
+      this.locations[searchLocationIndex].incrementCount();
+    }
+
+    console.log(this.locations);
+
+    this.syncLocations();
   }
-
-  // getLocations() {
-  //   this.http.get(Storage.getDocumentKeyURL('test/', 'locations/'))
-  //     .subscribe((res: Object) => {
-  //       const response:{key:string, data:any[]} = res as {key:string, data:any[]};
-  //       response.data.forEach((l) => {
-  //         const newLocation: VillainLocation = new VillainLocation(
-  //           l.location,
-  //           l.x,
-  //           l.y,
-  //           l.count,
-  //         )
-  //         this.locations.push(newLocation);
-  //       })
-  //     });
-
-  //   return of(this.locations);
-  // }
 
   getLocations(): Observable<VillainLocation[]> {
     return this.http
       .get(Storage.getDocumentKeyURL('test/', 'locations/'))
       .pipe(
         map((res: any) => {
-          return res.data.map((l: { location: string; x: number; y: number; count: number | undefined; }) => {
-            this.locations.push(new VillainLocation(l.location, l.x, l.y, l.count));
-            return new VillainLocation(l.location, l.x, l.y, l.count);
+          this.locations = res.data.map((l: { location: string; x: number; y: number; count: number | undefined; }) => {
+            const location = new VillainLocation(l.location, l.x, l.y, l.count);
+            return location;
           });
+
+          return this.locations;
         })
       );
   }
 
-  syncData() {
+  syncReports() {
     this.http.put(
       Storage.getDocumentKeyURL('test/', 'reports/'), 
       {"key": "reports", "data": this.reports}
-    ).subscribe((data) => {
-      console.log(data);
-    });
+    ).subscribe((d) => {});
+  }
 
+  syncLocations() {
     this.http.put(
       Storage.getDocumentKeyURL('test/', 'locations/'), 
       {"key": "locations", "data": this.locations}
-    ).subscribe((data) => {
-      console.log(data);
-    });
+    ).subscribe((d) => {});
   }
 }

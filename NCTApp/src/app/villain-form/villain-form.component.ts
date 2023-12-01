@@ -38,8 +38,9 @@ export class VillainFormComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    // this.locations = this.reportService.getLocations();
-    // console.log(this.locations)
+    this.reportService.getLocations().subscribe((stream) => {
+      this.locations = stream;
+    })
   }
 
   onSubmit(input:any) {
@@ -54,8 +55,8 @@ export class VillainFormComponent implements OnInit {
       input.comments,
       input.picture, 
     )
-    
     const location:VillainLocation = new VillainLocation(input.location, input.coordX, input.coordY);
+    
     this.reportService.addReport(report);
     this.reportService.addLocation(location);
     this.router.navigate(["/"])

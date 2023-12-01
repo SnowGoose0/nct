@@ -46,31 +46,15 @@ export class MapComponent implements OnInit {
   }
 
   putLabels() {
-    // const locations:VillainLocation[] = this.reportService.getLocations();
-
-    // console.log(locations);
-
-    // locations.forEach((l) => {
-    //   const locationName:string = l.getLocation();
-    //   const reportCount:number = l.getCount();
-    //   const {x, y} = l.getCoordinates();
-
-    //   L.marker([x, y]).addTo(this.map)
-  	// 	.bindPopup(`<b>${locationName}</b><br />${reportCount} nuisance reports`)
-    // });
-
     this.reportService.getLocations().subscribe((stream) => {
         const locations:VillainLocation[] = stream;
-          console.log('ok');
-          console.log(locations);
+        locations.forEach((l) => {
+        const locationName:string = l.getLocation();
+        const reportCount:number = l.getCount();
+        const {x, y} = l.getCoordinates();
 
-          locations.forEach((l) => {
-          const locationName:string = l.getLocation();
-          const reportCount:number = l.getCount();
-          const {x, y} = l.getCoordinates();
-
-          L.marker([x, y]).addTo(this.map)
-          .bindPopup(`<b>${locationName}</b><br />${reportCount} nuisance reports`)
+        L.marker([x, y]).addTo(this.map)
+        .bindPopup(`<b>${locationName}</b><br />${reportCount} nuisance reports`)
       });
     })
   }
