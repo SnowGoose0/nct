@@ -9,8 +9,17 @@ const stringCompare = (a:string, b:string):number => {
   return 0;
 }
 
-const dateCompare = () => {
+const dateCompare = (a:Date, b:Date) => {
+  const timeA = a.getTime();
+  const timeB = b.getTime();
 
+  if (timeA > timeB) {
+    return -1;
+  } else if (timeA < timeB) {
+    return 1;
+  } else {
+    return 0;
+  }
 }
 
 @Pipe({
@@ -27,7 +36,7 @@ export class SortPipe implements PipeTransform {
         case SortMethod.Villain:
           return stringCompare(a.name, b.name);
         case SortMethod.Time:
-          return 0;
+          return dateCompare(a.time, b.time);
         case SortMethod.Location:
           return stringCompare(a.location, b.location);
         default:
