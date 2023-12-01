@@ -38,8 +38,8 @@ export class VillainFormComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.locations = this.reportService.getLocations();
-    console.log(this.locations)
+    // this.locations = this.reportService.getLocations();
+    // console.log(this.locations)
   }
 
   onSubmit(input:any) {

@@ -4,6 +4,8 @@ import { VillainReport } from './villain';
 import { VillainLocation } from './location';
 import { Storage } from './storage';
 import { HttpClient } from '@angular/common/http';
+import { Observable, of } from 'rxjs';
+import { map } from 'rxjs/operators'
 
 @Injectable({
   providedIn: 'root'
@@ -16,8 +18,8 @@ export class ReportService {
   constructor(private http:HttpClient) { 
     this.reports = [];
     this.locations = [];
-    // let burnaby = {x: 49.2781, y: -122.9199};
-    // let metro = {x: 49.2276, y:-123.0076};
+    let burnaby = {x: 49.2781, y: -122.9199};
+    let metro = {x: 49.2276, y:-123.0076};
     // let fdf:VillainReport = new VillainReport('metrotown', metro, 'johnny', new Date(), VillainStatus.Open, 'idk', null, 'cooking')
     // let sss:VillainReport = new VillainReport('burnaby', burnaby, 'johnny', new Date(), VillainStatus.Open, 'idk', null, 'cooking')
     // let lll:VillainLocation = new VillainLocation('burnaby', burnaby.x, burnaby.y);
@@ -28,18 +30,18 @@ export class ReportService {
     this.http.get(Storage.getDocumentKeyURL('test/', 'reports/'))
       .subscribe((res: Object) => {
         const response:{key:string, data:any[]} = res as {key:string, data:any[]};
-        response.data.forEach((report) => {
+        response.data.forEach((r) => {
 
           const newReport: VillainReport = new VillainReport(
-            report.name,
-            report.reporter,
-            new Date(report.time), 
-            report.location, 
-            report.coordinates, 
-            report.status, 
-            report.description,
-            report.imageurl, 
-            report.id,
+            r.name,
+            r.reporter,
+            new Date(r.time), 
+            r.location, 
+            r.coordinates, 
+            r.status, 
+            r.description,
+            r.imageurl, 
+            r.id,
           )
 
           this.reports.push(newReport);
@@ -105,8 +107,35 @@ export class ReportService {
     this.syncData();
   }
 
-  getLocations() {
-    return this.locations;
+  // getLocations() {
+  //   this.http.get(Storage.getDocumentKeyURL('test/', 'locations/'))
+  //     .subscribe((res: Object) => {
+  //       const response:{key:string, data:any[]} = res as {key:string, data:any[]};
+  //       response.data.forEach((l) => {
+  //         const newLocation: VillainLocation = new VillainLocation(
+  //           l.location,
+  //           l.x,
+  //           l.y,
+  //           l.count,
+  //         )
+  //         this.locations.push(newLocation);
+  //       })
+  //     });
+
+  //   return of(this.locations);
+  // }
+
+  getLocations(): Observable<VillainLocation[]> {
+    return this.http
+      .get(Storage.getDocumentKeyURL('test/', 'locations/'))
+      .pipe(
+        map((res: any) => {
+          return res.data.map((l: { location: string; x: number; y: number; count: number | undefined; }) => {
+            this.locations.push(new VillainLocation(l.location, l.x, l.y, l.count));
+            return new VillainLocation(l.location, l.x, l.y, l.count);
+          });
+        })
+      );
   }
 
   syncData() {

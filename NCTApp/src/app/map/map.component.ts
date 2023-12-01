@@ -9,7 +9,7 @@ import { VillainLocation } from '../location';
   templateUrl: './map.component.html',
   styleUrl: './map.component.css'
 })
-export class MapComponent implements OnInit{
+export class MapComponent implements OnInit {
   private map!: L.Map
   private activeCircleMarker:L.CircleMarker<any> | null;
   @Output() mapClick = new EventEmitter();
@@ -46,16 +46,33 @@ export class MapComponent implements OnInit{
   }
 
   putLabels() {
-    const locations:VillainLocation[] = this.reportService.getLocations();
+    // const locations:VillainLocation[] = this.reportService.getLocations();
 
-    locations.forEach((l) => {
-      const locationName:string = l.getLocation();
-      const reportCount:number = l.getCount();
-      const {x, y} = l.getCoordinates();
+    // console.log(locations);
 
-      L.marker([x, y]).addTo(this.map)
-  		.bindPopup(`<b>${locationName}</b><br />${reportCount} nuisance reports`)
-    });
+    // locations.forEach((l) => {
+    //   const locationName:string = l.getLocation();
+    //   const reportCount:number = l.getCount();
+    //   const {x, y} = l.getCoordinates();
+
+    //   L.marker([x, y]).addTo(this.map)
+  	// 	.bindPopup(`<b>${locationName}</b><br />${reportCount} nuisance reports`)
+    // });
+
+    this.reportService.getLocations().subscribe((stream) => {
+        const locations:VillainLocation[] = stream;
+          console.log('ok');
+          console.log(locations);
+
+          locations.forEach((l) => {
+          const locationName:string = l.getLocation();
+          const reportCount:number = l.getCount();
+          const {x, y} = l.getCoordinates();
+
+          L.marker([x, y]).addTo(this.map)
+          .bindPopup(`<b>${locationName}</b><br />${reportCount} nuisance reports`)
+      });
+    })
   }
 
   ngOnInit(): void {
