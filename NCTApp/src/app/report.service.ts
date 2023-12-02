@@ -20,28 +20,6 @@ export class ReportService {
     this.locations = [];
     let burnaby = {x: 49.2781, y: -122.9199};
     let metro = {x: 49.2276, y:-123.0076};
-
-    this.http.get(Storage.getDocumentKeyURL('test/', 'reports/'))
-      .subscribe((res: Object) => {
-        const response:{key:string, data:any[]} = res as {key:string, data:any[]};
-        response.data.forEach((r) => {
-
-          const newReport: VillainReport = new VillainReport(
-            r.name,
-            r.reporter,
-            new Date(r.time), 
-            r.location, 
-            r.coordinates, 
-            r.status, 
-            r.description,
-            r.imageurl, 
-            r.id,
-          )
-
-          this.reports.push(newReport);
-        })
-  
-      });
   }
 
   addReport(report: VillainReport) {
@@ -63,16 +41,29 @@ export class ReportService {
     return this.syncReports();
   }
 
-  getReport(id: string) {
-    const idx: number = this.reports.findIndex((r:VillainReport) => r.getId() == id);
-
-    if (idx === -1) return undefined;
-
-    return this.reports[idx];
-  }
-
   getAllReports() {
-    return this.reports;
+    return this.http
+    .get(Storage.getDocumentKeyURL('test/', 'reports/'))
+    .pipe(
+      map((res: any) => {
+        this.reports = res.data.map((r: any) => {
+          const report: VillainReport = new VillainReport(
+            r.name,
+            r.reporter,
+            new Date(r.time), 
+            r.location, 
+            r.coordinates, 
+            r.status, 
+            r.description,
+            r.imageurl, 
+            r.id,
+          )
+          return report;
+        });
+        
+        return this.reports;
+      })
+    );
   }
 
   addLocation(location:VillainLocation) {

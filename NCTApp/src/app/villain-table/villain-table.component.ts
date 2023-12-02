@@ -38,7 +38,9 @@ export class VillainTableComponent implements OnInit {
   }
 
   onUpdateTable() {
-    this.villainReports = this.rs.getAllReports();
+    this.rs.getAllReports().subscribe((stream) => {
+      this.villainReports = stream;
+    });
   }
 
   ngOnInit(): void {

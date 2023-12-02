@@ -25,6 +25,7 @@ export class VillainAuthenticationComponent {
     }
 
     this.form = new FormGroup(formControls);
+    this.report = new VillainReport('', '', new Date(), '', {x:NaN,y:NaN}, VillainStatus.Open, '');
     this.errorMessage = '';
     this.userAction = '';
     this.throwError = false;
@@ -32,12 +33,19 @@ export class VillainAuthenticationComponent {
 
   ngOnInit(): void {
     const reportId:string = this.activatedRoute.snapshot.params['id'];
-    this.report = this.reportService.getReport(reportId);
-    this.userAction = this.activatedRoute.snapshot.params['action'];
+    // this.report = this.reportService.getReport(reportId);
 
-    if (this.report === undefined) {
-      this.throwError = true;
-    }
+    this.reportService.getAllReports().subscribe((stream) => {
+      this.report = stream.find((r) => {
+        return r.getId() === reportId;
+      })
+
+      if (this.report === undefined) {
+        this.throwError = true;
+      }
+    });
+
+    this.userAction = this.activatedRoute.snapshot.params['action'];
 
     if (this.userAction !== 'delete' && this.userAction !== 'update') {
       this.throwError = true;

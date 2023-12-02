@@ -19,9 +19,7 @@ export class VillainInfoComponent implements OnInit {
     private router:Router
   ) {
       this.reportId = activatedRoute.snapshot.params['id']
-      this.report = reportService.getReport(this.reportId);
-      console.log(reportService.getAllReports());
-      console.log(this.report);
+      this.report = new VillainReport('', '', new Date(), '', {x:NaN,y:NaN}, VillainStatus.Open, '');
   }
 
   onUpdateStatus() {
@@ -30,6 +28,12 @@ export class VillainInfoComponent implements OnInit {
   }
   
   ngOnInit(): void {
+    this.reportId = this.activatedRoute.snapshot.params['id']
+    this.reportService.getAllReports().subscribe((stream) => {
+      this.report = stream.find((r) => {
+        return r.getId() === this.reportId;
+      })
+    });
     
   }
 }
