@@ -3,27 +3,28 @@
   [formGroup]="form"
   (ngSubmit)="onSubmit(form.value)"
 >
+  <p class="emergency" *ngIf="errorMessage !== ''">{{ errorMessage }}</p>
   <fieldset>
     <legend>New Report</legend>
     <input 
       type="text" 
       name="name"
       formControlName="reporter"
-      placeholder="REPORTER NAME"
+      placeholder="REPORTER NAME*"
     > <br>
 
     <input 
       type="tel" 
       name="name"
       formControlName="telephone"
-      placeholder="PHONE NUMBER"
+      placeholder="PHONE NUMBER* ###-###-####"
     > <br>
 
     <input 
       type="text" 
       name="mischief_maker"
       formControlName="mischief_maker"
-      placeholder="MISCHIEF MAKER"
+      placeholder="MISCHIEF MAKER*"
     > <br>
 
     <div>
@@ -34,7 +35,7 @@
         name="location"
         list="preset-locations"
         formControlName="location"
-        placeholder="LOCATION"
+        placeholder="LOCATION*"
       >
 
       <datalist id="preset-locations">
@@ -48,7 +49,7 @@
         type="number" 
         name="coordinate-X"
         formControlName="coordX"
-        placeholder="X"
+        placeholder="X*"
         [value]="coordX"
       >
 
@@ -56,7 +57,7 @@
         type="number" 
         name="coordinate-Y"
         formControlName="coordY"
-        placeholder="Y"
+        placeholder="Y*"
         [value]="coordY"
       >
     </div>
@@ -68,7 +69,7 @@
       placeholder="IMAGE URL (OPTIONAL)"
     > <br>
 
-   <textarea name="comments" id="villain-form" formControlName="comments" cols="30" rows="10" placeholder="DESCRIPTION"></textarea> <br>
+   <textarea name="comments" id="villain-form" formControlName="comments" cols="30" rows="10" placeholder="DESCRIPTION*"></textarea> <br>
    <button routerLink="/">Cancel</button>
     <button [disabled]="!form.valid">Publish</button>
   </fieldset>
