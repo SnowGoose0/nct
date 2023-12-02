@@ -73,7 +73,7 @@ export class VillainFormComponent implements OnInit {
       }
     }
 
-    const report:VillainReport = new VillainReport(input.mischief_maker, input.reporter, new Date(), input.location, {x: input.coordX, y: input.coordY}, VillainStatus.Open, input.comments, input.picture);
+    const report:VillainReport = new VillainReport(input.mischief_maker, input.reporter, input.telephone, new Date(), input.location, {x: input.coordX, y: input.coordY}, VillainStatus.Open, input.comments, input.picture);
     const location:VillainLocation = new VillainLocation(input.location, input.coordX, input.coordY);
     
     this.reportService.addReport(report).subscribe(() => {

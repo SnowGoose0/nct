@@ -25,7 +25,7 @@ export class VillainAuthenticationComponent {
     }
 
     this.form = new FormGroup(formControls);
-    this.report = new VillainReport('', '', new Date(), '', {x:NaN,y:NaN}, VillainStatus.Open, '');
+    this.report = new VillainReport('', '', '', new Date(), '', {x:NaN,y:NaN}, VillainStatus.Open, '');
     this.errorMessage = '';
     this.userAction = '';
     this.throwError = false;

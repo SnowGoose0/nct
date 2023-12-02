@@ -1,4 +1,4 @@
-<div *ngIf="report === undefined; then display_error else display_report"></div>
+<!-- <div *ngIf="report === undefined; then display_error else display_report"></div>
 
 <ng-template #display_error>
 Error: Report not found!
@@ -15,6 +15,51 @@ Error: Report not found!
       <li><p>Status: {{ report!.getStatus() | status}}</p> <button (click)="onUpdateStatus()">Update</button></li>
       <li><p>Description: {{ report?.description }}</p></li>
     </ul>
+    <button routerLink="/">Back</button>
+  </div>
+</ng-template> -->
+
+<div *ngIf="report === undefined; then display_error else display_report"></div>
+
+<ng-template #display_error>
+  <div class="error-message">
+    Error: Report not found!
+  </div>
+</ng-template>
+
+<ng-template #display_report>
+  <div class="report-container">
+    <img [src]="report!.imageurl" [alt]="report!.getImageAlt()">
+    <table>
+      <tr>
+        <td>Mischief Maker:</td>
+        <td>{{ report!.name }}</td>
+      </tr>
+      <tr>
+        <td>Location:</td>
+        <td>{{ report!.location | titlecase }}</td>
+      </tr>
+      <tr>
+        <td>Witness:</td>
+        <td>{{ report?.reporter }}</td>
+      </tr>
+      <tr>
+        <td>Witness Telephone</td>
+        <td>{{ report?.telephone }}</td>
+      </tr>
+      <tr>
+        <td>Time:</td>
+        <td>{{ report?.time | date: "yyyy-MMM-dd '('hh:mm a')'" }}</td>
+      </tr>
+      <tr>
+        <td>Status:</td>
+        <td>{{ report!.getStatus() | status }} <button id="update" (click)="onUpdateStatus()">Update</button></td>
+      </tr>
+      <tr>
+        <td>Description:</td>
+        <td>{{ report?.description }}</td>
+      </tr>
+    </table>
     <button routerLink="/">Back</button>
   </div>
 </ng-template>

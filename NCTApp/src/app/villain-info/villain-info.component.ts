@@ -19,7 +19,7 @@ export class VillainInfoComponent implements OnInit {
     private router:Router
   ) {
       this.reportId = activatedRoute.snapshot.params['id']
-      this.report = new VillainReport('', '', new Date(), '', {x:NaN,y:NaN}, VillainStatus.Open, '');
+      this.report = new VillainReport('', '', '', new Date(), '', {x:NaN,y:NaN}, VillainStatus.Open, '');
   }
 
   onUpdateStatus() {

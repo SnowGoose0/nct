@@ -20,6 +20,7 @@ export class VillainReport implements Villain {
 	constructor (
     public name: string,
     public reporter: string, 
+    public telephone: string,
     public time: Date, 
 		public location: string, 
     public coordinates: {x:number, y:number},

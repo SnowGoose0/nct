@@ -50,6 +50,7 @@ export class ReportService {
           const report: VillainReport = new VillainReport(
             r.name,
             r.reporter,
+            r.telephone,
             new Date(r.time), 
             r.location, 
             r.coordinates, 
@@ -60,7 +61,7 @@ export class ReportService {
           )
           return report;
         });
-        
+
         return this.reports;
       })
     );

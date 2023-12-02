@@ -2,28 +2,61 @@ div {
     margin-top: 20px;
 }
 
-ul {
-    list-style-type: none;
-    padding: 0;
+.error-message {
+    color: red;
 }
 
-li {
+.report-container {
     display: flex;
+    flex-direction: column;
     align-items: center;
-    justify-content: center;
-    margin-bottom: 15px;
 }
 
-li > button {
-    margin-top: 0;
-    margin-left: 10px;
+img {
+    max-width: 100%;
+    height: auto;
 }
 
-p {
-    margin: 0;
-}
-
-/* Styling for the back button */
-button[routerLink="/"] {
+table {
+    border-collapse: collapse;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     margin-top: 20px;
+    font-size: 10pt;
+    width: 100%;
 }
+
+th, td {
+    padding: 5px;
+    text-align: center;
+    border-bottom: 1px solid #a4abb5;
+}
+
+th {
+    border-top: 1px solid #a4abb5;
+    background-color: #1e1e1e;
+    cursor: pointer;
+}
+
+tr {
+    background-color: #1e1e1e;
+    border-bottom: 1px solid #a4abb5;
+    text-align: center;
+}
+
+.sortable:hover {
+    background-color: #3e4451;
+}
+
+tr:hover {
+    background-color: #232323;
+}
+  
+
+td:first-child {
+    width: 200px;
+}
+
+#update {
+    margin-top: 0;
+}
+
