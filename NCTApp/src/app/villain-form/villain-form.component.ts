@@ -50,6 +50,7 @@ export class VillainFormComponent implements OnInit {
   };
 
   ngOnInit(): void {
+    this.reportService.getAllReports().subscribe(() => {});
     this.reportService.getLocations().subscribe((stream) => {
       this.locations = stream;
     })

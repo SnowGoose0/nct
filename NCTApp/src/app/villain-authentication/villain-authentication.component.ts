@@ -45,6 +45,8 @@ export class VillainAuthenticationComponent {
       }
     });
 
+    this.reportService.getLocations().subscribe(() => {});
+
     this.userAction = this.activatedRoute.snapshot.params['action'];
 
     if (this.userAction !== 'delete' && this.userAction !== 'update') {
